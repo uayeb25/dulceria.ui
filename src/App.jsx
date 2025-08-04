@@ -17,6 +17,7 @@ import Dashboard from './components/Dashboard'
 import LoginScreen from './components/LoginScreen'
 import SignupScreen from './components/SignupScreen'
 import CatalogTypesList from './components/CatalogTypesList'
+import CatalogsList from './components/CatalogsList'
 
 
 
@@ -63,6 +64,15 @@ function App() {
               element={
                 <ProtectedRoute>
                   <CatalogTypesList />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path='/catalogs'
+              element={
+                <ProtectedRoute>
+                  <CatalogsList />
                 </ProtectedRoute>
               }
             />

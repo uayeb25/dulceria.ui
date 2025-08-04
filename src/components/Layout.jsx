@@ -61,9 +61,12 @@ const Layout = ({ children }) => {
                                 </button>
                             </li>
                             <li>
-                                <button className="flex items-center px-4 py-2 text-gray-700 hover:text-green-600 hover:bg-green-50 rounded-md transition-colors font-medium">
-                                    <span className="mr-2">🍬</span>
-                                    Productos
+                                <button 
+                                    className="flex items-center px-4 py-2 text-gray-700 hover:text-green-600 hover:bg-green-50 rounded-md transition-colors font-medium"
+                                    onClick={() => navigate('/catalogs')}
+                                >
+                                    <span className="mr-2">📋</span>
+                                    Catálogos
                                 </button>
                             </li>
                         </ul>
