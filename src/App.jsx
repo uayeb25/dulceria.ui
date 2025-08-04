@@ -16,6 +16,7 @@ import PublicRoute from './components/PublicRoute'
 import Dashboard from './components/Dashboard'
 import LoginScreen from './components/LoginScreen'
 import SignupScreen from './components/SignupScreen'
+import CatalogTypesList from './components/CatalogTypesList'
 
 
 
@@ -53,6 +54,15 @@ function App() {
               element={
                 <ProtectedRoute>
                   <Dashboard />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path='/catalog-types'
+              element={
+                <ProtectedRoute>
+                  <CatalogTypesList />
                 </ProtectedRoute>
               }
             />

@@ -72,13 +72,36 @@ export const AuthProvider = ( {children} ) => {
         setIsAuthenticated(false);
     }
 
+    const validateToken = () => {
+        const token = localStorage.getItem('authToken');
+        if (!token) {
+            logout();
+            return false;
+        }
+
+        try {
+            const tokenPayload = JSON.parse(atob(token.split('.')[1]));
+            const currentTime = Date.now() / 1000;
+
+            if (tokenPayload.exp < currentTime) {
+                logout();
+                return false;
+            }
+            return true;
+        } catch (error) {
+            logout();
+            return false;
+        }
+    };
+
     const value = {
         user,
         isAuthenticated,
         loading,
         login,
         register,
-        logout
+        logout,
+        validateToken
     }
 
     return(
