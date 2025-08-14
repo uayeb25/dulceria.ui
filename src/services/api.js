@@ -2,13 +2,6 @@ const API_BASE_URL = 'https://dulceria-api-production.up.railway.app';
 //const API_BASE_URL = 'http://localhost:8000';
 
 
-
-const apiConfig = {
-  headers: {
-    'Content-Type': 'application/json',
-  },
-};
-
 const handleResponse = async (response) => {
   if (!response.ok) {
     const errorData = await response.json().catch(() => ({}));
@@ -18,11 +11,15 @@ const handleResponse = async (response) => {
       case 401:
         localStorage.removeItem('authToken');
         localStorage.removeItem('userInfo');
-
         if (typeof window !== 'undefined') {
-          window.location.href = '/login';
+          // Compatibilidad con HashRouter en GitHub Pages
+          const loginHashUrl = `${window.location.origin}${window.location.pathname}#/login`;
+          const currentUrl = window.location.href;
+          const alreadyOnLogin = currentUrl.includes('#/login') || currentUrl.endsWith('/login');
+          if (!alreadyOnLogin) {
+            window.location.replace(loginHashUrl);
+          }
         }
-
         throw new Error('Tu sesión ha expirado. Por favor, inicia sesión nuevamente.');
       case 403:
         throw new Error('No tienes permisos para realizar esta acción.');

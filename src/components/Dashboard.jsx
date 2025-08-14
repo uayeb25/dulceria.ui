@@ -1,8 +1,7 @@
-import { useAuth } from "../context/AuthContext"
 import Layout from "./Layout"
 
 const Dashboard = () => {
-    const { user } = useAuth()
+    // const { user } = useAuth()
 
     return (
         <Layout>

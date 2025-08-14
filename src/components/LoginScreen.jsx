@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom"
 import { useAuth } from "../context/AuthContext";
-import { isValidEmail, validatePassword } from "../utils/validators";
+// import { isValidEmail, validatePassword } from "../utils/validators";
 
 const LoginScreen = () => {
 
@@ -82,7 +82,14 @@ const LoginScreen = () => {
                 )}
 
                 {/* Formulario */}
-                <form className="space-y-4" noValidate>
+                <form
+                    className="space-y-4"
+                    noValidate
+                    onSubmit={(e) => {
+                        e.preventDefault();
+                        handleLogin();
+                    }}
+                >
                 <div>
                     <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
                     Email
@@ -97,11 +104,6 @@ const LoginScreen = () => {
                     onChange={ (e) => {
                         setEmail(e.target.value);
                         if (error) setError(''); // Limpiar error cuando el usuario escriba
-                    }}
-                    onKeyDown={(e) => {
-                        if (e.key === 'Enter') {
-                            handleLogin();
-                        }
                     }}
                     />
                 </div>
@@ -121,17 +123,11 @@ const LoginScreen = () => {
                         setPassword(e.target.value);
                         if (error) setError(''); // Limpiar error cuando el usuario escriba
                     }}
-                    onKeyDown={(e) => {
-                        if (e.key === 'Enter') {
-                            handleLogin();
-                        }
-                    }}
                     />
                 </div>
 
                 <button
-                    type="button"
-                    onClick={handleLogin}
+                    type="submit"
                     className="w-full bg-pink-500 text-white py-2 px-4 rounded-md hover:bg-pink-600 font-medium disabled:opacity-50 disabled:cursor-not-allowed"
                     disabled={isSubmitting}
                 >
